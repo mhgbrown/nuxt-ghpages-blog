@@ -12,7 +12,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "test": "jest",
-    "deploy": "npm run generate && push-dir --dir=dist --branch=master --cleanup --verbose"
+    "deploy": "npm run generate && push-dir --dir=dist --branch=ghpages --cleanup --verbose"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
