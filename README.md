@@ -1,4 +1,4 @@
-# nuxt-ghpages-blog
+# nuxt-ghpages-blog [![Build Status](https://travis-ci.org/mhgbrown/nuxt-ghpages-blog.svg?branch=master)](http://travis-ci.org/mhgbrown/nuxt-ghpages-blog)
 
 > Nuxt-based Github-hosted blog
 

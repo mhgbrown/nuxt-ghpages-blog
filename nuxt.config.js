@@ -55,22 +55,26 @@ module.exports = {
    * Static generation configuration
    */
   generate: {
-    routes: function () {
-      const postsDirectory = 'posts/'
-      return axios.get(`https://api.github.com/repos/mhgbrown/nuxt-ghpages-blog-content/git/trees/master?recursive=1`)
-        .then((response) => {
-          return response.data.tree.reduce((memo, node) => {
-            if (node.path.startsWith(postsDirectory)) {
-              // NB: route is actually the same as node.path in my case
-              memo.push({
-                route: `/posts/${node.sha}`,
-                payload: node
-              })
-            }
+    async routes () {
+      try {
+        const postsDirectory = 'posts/'
+        const response = await axios.get(`https://api.github.com/repos/mhgbrown/nuxt-ghpages-blog-content/git/trees/master?recursive=1`)
+        return response.data.tree.reduce((memo, node) => {
+          if (node.path.startsWith(postsDirectory)) {
+            // NB: route is actually the same as node.path in my case
+            memo.push({
+              route: `/posts/${node.sha}`,
+              payload: node
+            })
+          }
 
-            return memo
-          }, [])
-        })
+          return memo
+        }, [])
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error.response)
+        throw error
+      }
     }
   },
 
