@@ -59,8 +59,6 @@ module.exports = {
       try {
         const postsDirectory = 'posts/'
         const url = `https://api.github.com/repos/mhgbrown/nuxt-ghpages-blog-content/git/trees/master?recursive=1&access_token=${process.env.GITHUB_TOKEN}`
-        // eslint-disable-next-line no-console
-        console.info(`Requesting ${url}`)
         const response = await axios.get(url)
         return response.data.tree.reduce((memo, node) => {
           if (node.path.startsWith(postsDirectory)) {
