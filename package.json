@@ -1,7 +1,7 @@
 {
   "name": "nuxt-ghpages-blog",
   "version": "1.0.0",
-  "description": "Nuxt-based Github-hosted blog",
+  "description": "Nuxt-based Travis-deployed Github-hosted blog",
   "author": "Morgan Brown",
   "private": true,
   "scripts": {
