@@ -51,13 +51,6 @@ export default {
     '@nuxtjs/axios'
   ],
 
-  /*
-  ** Environment variables to inject
-  */
-  env: {
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN
-  },
-
   /**
    * Static generation configuration
    */
@@ -74,7 +67,6 @@ export default {
           }
         })
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error(error.response)
         throw error
       }
