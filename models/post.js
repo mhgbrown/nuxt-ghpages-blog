@@ -1,4 +1,7 @@
+import * as matter from 'gray-matter'
 import postsClient from '../api/posts'
+import Markdown from '../utils/markdown'
+import Base64 from '../utils/base64'
 
 class Post {
   static async all () {
@@ -14,15 +17,19 @@ class Post {
   static _fromNode (node) {
     const post = new this(node)
     const pathPrefix = 'posts/'
-    post.name = node.path.replace(pathPrefix, '')
-    post.title = this._extractTitle(post.name)
-    post.date = this._extractDate(post.name)
+    const name = node.path.replace(pathPrefix, '')
+    post.title = this._extractTitle(name)
+    post.date = this._extractDate(name)
     return post
   }
 
   static _fromBlob (blob) {
     const post = new this(blob)
-    post.content = ''
+    const decodedContent = Base64.decode(blob.content)
+    const data = matter(decodedContent)
+    post.title = data.title
+    post.date = data.date
+    post.html = Markdown.toHTML(data.content)
     return post
   }
 

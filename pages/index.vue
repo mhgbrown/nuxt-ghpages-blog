@@ -9,7 +9,7 @@
       sm8
       md6
     >
-      <h1>My Posts</h1>
+      <h1>Posts</h1>
       <ul>
         <li v-for="post in posts" :key="post.sha">
           <router-link :to="{ name: 'posts-id', params: { id: post.sha } }">{{ post.title }}</router-link>
