@@ -10,7 +10,7 @@
       md6
     >
       <h1>{{ post.title }}</h1>
-      <div v-html="post.html"></div>
+      <div v-html="post.html" />
     </v-flex>
   </v-layout>
 </template>

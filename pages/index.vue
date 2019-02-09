@@ -12,7 +12,9 @@
       <h1>Posts</h1>
       <ul>
         <li v-for="post in posts" :key="post.sha">
-          <router-link :to="{ name: 'posts-id', params: { id: post.sha } }">{{ post.title }}</router-link>
+          <router-link :to="{ name: 'posts-id', params: { id: post.sha } }">
+            {{ post.title }}
+          </router-link>
         </li>
       </ul>
     </v-flex>
