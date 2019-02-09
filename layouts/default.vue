@@ -1,7 +1,7 @@
 <template>
-  <v-app light>
+  <v-app light class="layout layout--default white black--text">
     <v-content>
-      <v-container>
+      <v-container class="layout__container">
         <nuxt />
       </v-container>
     </v-content>
@@ -17,3 +17,7 @@ export default {
   }
 }
 </script>
+<style lang="stylus">
+.container.layout__container
+  max-width 800px
+</style>
