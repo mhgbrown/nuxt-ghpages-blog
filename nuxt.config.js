@@ -1,8 +1,8 @@
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
-const axios = require('axios')
-const pkg = require('./package')
+import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+import pkg from './package'
+import Post from './models/post'
 
-module.exports = {
+export default {
   mode: 'universal',
 
   /*
@@ -51,26 +51,28 @@ module.exports = {
     '@nuxtjs/axios'
   ],
 
+  /*
+  ** Environment variables to inject
+  */
+  env: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN
+  },
+
   /**
    * Static generation configuration
    */
   generate: {
+    interval: 100,
+
     async routes () {
       try {
-        const postsDirectory = 'posts/'
-        const url = `https://api.github.com/repos/mhgbrown/nuxt-ghpages-blog-content/git/trees/master?recursive=1&access_token=${process.env.GITHUB_TOKEN}`
-        const response = await axios.get(url)
-        return response.data.tree.reduce((memo, node) => {
-          if (node.path.startsWith(postsDirectory)) {
-            // NB: route is actually the same as node.path in my case
-            memo.push({
-              route: `/posts/${node.sha}`,
-              payload: node
-            })
+        const posts = await Post.all()
+        return posts.map((post) => {
+          return {
+            route: `/posts/${post.sha}`,
+            payload: post
           }
-
-          return memo
-        }, [])
+        })
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error.response)
