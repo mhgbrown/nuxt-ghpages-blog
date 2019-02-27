@@ -21,6 +21,7 @@ import Post from '@/models/post'
 export default {
   async asyncData ({ params, error, payload }) {
     try {
+      // TODO don't do this if we don't need to do it
       const post = await Post.bySha(params.id)
       return {
         post
