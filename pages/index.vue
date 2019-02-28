@@ -31,7 +31,8 @@ export default {
     // }
 
     try {
-      const posts = (await Post.all()).sort((a, b) => {
+      const allPosts = await Post.all()
+      const posts = allPosts.sort((a, b) => {
         return Date.parse(b.date) - Date.parse(a.date)
       })
 
