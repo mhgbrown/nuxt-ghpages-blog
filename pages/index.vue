@@ -22,12 +22,13 @@
 import Post from '@/models/post'
 
 export default {
-  async asyncData ({ params, error, payload, redirect, route }) {
+  async asyncData ({ params, error, payload, route }) {
     console.warn(process.server, process.client, process.static, route)
 
     // Don't load stuff if we're crusing the generated site
     if (process.client && process.static) {
-      return redirect(route.path)
+      window.location.href = route.path
+      return
     }
 
     try {
