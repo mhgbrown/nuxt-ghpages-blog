@@ -30,12 +30,19 @@ export default {
     //   return
     // }
 
-    const posts = (await Post.all()).sort((a, b) => {
-      return Date.parse(b.date) - Date.parse(a.date)
-    })
+    try {
+      const posts = (await Post.all()).sort((a, b) => {
+        return Date.parse(b.date) - Date.parse(a.date)
+      })
 
-    return {
-      posts
+      return {
+        posts
+      }
+    } catch (error) {
+      console.error(error.response)
+      if (process.client) {
+        window.location.reload()
+      }
     }
   }
 }

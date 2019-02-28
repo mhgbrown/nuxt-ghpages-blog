@@ -33,7 +33,9 @@ export default {
       }
     } catch (error) {
       console.error(error.response)
-      throw error
+      if (process.client) {
+        window.location.reload()
+      }
     }
   }
 }
