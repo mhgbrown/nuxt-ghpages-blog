@@ -21,9 +21,9 @@ export default {
     console.warn(process.server, process.client, process.static)
 
     // Don't load stuff if we're crusing the generated site
-    if (process.client && process.static) {
-      return
-    }
+    // if (process.client && process.static) {
+    //   return
+    // }
 
     try {
       // TODO don't do this if we don't need to do it

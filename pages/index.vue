@@ -9,9 +9,9 @@
     >
       <ul class="list--unstyled">
         <li v-for="post in posts" :key="post.sha">
-          <router-link :to="{ name: 'posts-id', params: { id: post.sha } }">
+          <nuxt-link :to="{ name: 'posts-id', params: { id: post.sha } }">
             {{ post.title }}
-          </router-link>
+          </nuxt-link>
         </li>
       </ul>
     </v-flex>
@@ -22,13 +22,13 @@
 import Post from '@/models/post'
 
 export default {
-  async asyncData () {
+  async asyncData ({ params, error, payload }) {
     console.warn(process.server, process.client, process.static)
 
     // Don't load stuff if we're crusing the generated site
-    if (process.client && process.static) {
-      return
-    }
+    // if (process.client && process.static) {
+    //   return
+    // }
 
     const posts = (await Post.all()).sort((a, b) => {
       return Date.parse(b.date) - Date.parse(a.date)
