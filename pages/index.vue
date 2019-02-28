@@ -25,9 +25,10 @@ export default {
   async asyncData () {
     console.warn(process.server, process.client, process.static)
 
-    // if (process.client) {
-    //   return
-    // }
+    // Don't load stuff if we're crusing the generated site
+    if (process.client && process.static) {
+      return
+    }
 
     const posts = (await Post.all()).sort((a, b) => {
       return Date.parse(b.date) - Date.parse(a.date)
