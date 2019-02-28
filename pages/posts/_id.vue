@@ -18,6 +18,12 @@ import Post from '@/models/post'
 
 export default {
   async asyncData ({ params, error, payload }) {
+    console.warn(process.server, process.client, process.static)
+
+    // if (process.client) {
+    //   return
+    // }
+
     try {
       // TODO don't do this if we don't need to do it
       const post = await Post.bySha(params.id)

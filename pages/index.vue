@@ -23,6 +23,12 @@ import Post from '@/models/post'
 
 export default {
   async asyncData () {
+    console.warn(process.server, process.client, process.static)
+
+    // if (process.client) {
+    //   return
+    // }
+
     const posts = (await Post.all()).sort((a, b) => {
       return Date.parse(b.date) - Date.parse(a.date)
     })

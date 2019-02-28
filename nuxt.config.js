@@ -51,6 +51,13 @@ export default {
     '@nuxtjs/axios'
   ],
 
+  /*
+  ** Router configuration
+  */
+  router: {
+    base: process.env.ROUTER_BASE || '/'
+  },
+
   /**
    * Static generation configuration
    */
