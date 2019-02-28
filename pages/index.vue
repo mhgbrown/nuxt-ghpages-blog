@@ -9,9 +9,9 @@
     >
       <ul class="list--unstyled">
         <li v-for="post in posts" :key="post.sha">
-          <nuxt-link :to="{ name: 'posts-id', params: { id: post.sha } }">
+          <a :href="$router.resolve({ name: 'posts-id', params: { id: post.sha } }).href">
             {{ post.title }}
-          </nuxt-link>
+          </a>
         </li>
       </ul>
     </v-flex>
@@ -41,9 +41,6 @@ export default {
       }
     } catch (error) {
       console.error(error.response)
-      if (process.client) {
-        window.location.reload()
-      }
     }
   }
 }
