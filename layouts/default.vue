@@ -17,7 +17,3 @@ export default {
   }
 }
 </script>
-<style lang="stylus">
-.container.layout__container
-  max-width 800px
-</style>
