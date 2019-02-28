@@ -9,9 +9,9 @@
     >
       <ul class="list--unstyled">
         <li v-for="post in posts" :key="post.sha">
-          <nuxt-link :to="{ name: 'posts-id', params: { id: post.sha } }">
+          <a :href="$router.resolve({ name: 'posts-id', params: { id: post.sha } }).href">
             {{ post.title }}
-          </nuxt-link>
+          </a>
         </li>
       </ul>
     </v-flex>
@@ -24,12 +24,6 @@ import Post from '@/models/post'
 export default {
   async asyncData ({ params, error, payload, route }) {
     console.warn(process.server, process.client, process.static, route)
-
-    // Don't load stuff if we're crusing the generated site
-    if (process.client && process.static) {
-      window.location.href = route.path
-      return
-    }
 
     try {
       const allPosts = await Post.all()
