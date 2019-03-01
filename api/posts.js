@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const cache = {}
+
 export default {
   async bySha (sha) {
     let url = `https://api.github.com/repos/mhgbrown/nuxt-ghpages-blog-content/git/blobs/${sha}`
@@ -8,8 +10,12 @@ export default {
       url = url + `?access_token=${process.env.GITHUB_TOKEN}`
     }
 
-    const { data } = await axios.get(url)
-    return data
+    if (!cache[url]) {
+      const { data } = await axios.get(url)
+      cache[url] = data
+    }
+
+    return cache[url]
   },
   async all () {
     const postsPath = 'posts/'
@@ -19,13 +25,19 @@ export default {
       url = url + `&access_token=${process.env.GITHUB_TOKEN}`
     }
 
-    const { data } = await axios.get(url)
-    return data.tree.reduce((memo, node) => {
-      if (node.path.startsWith(postsPath)) {
-        memo.push(node)
-      }
+    if (!cache[url]) {
+      const { data } = await axios.get(url)
+      const posts = data.tree.reduce((memo, node) => {
+        if (node.path.startsWith(postsPath)) {
+          memo.push(node)
+        }
 
-      return memo
-    }, [])
+        return memo
+      }, [])
+
+      cache[url] = posts
+    }
+
+    return cache[url]
   }
 }

@@ -1,16 +1,5 @@
 import Post from '../models/post'
-
-const cache = {
-  posts: null
-}
-
-const allPostsCached = async function () {
-  if (!cache.posts) {
-    cache.posts = await Post.all()
-  }
-
-  return cache.posts
-}
+import postsClient from '../api/posts'
 
 export const state = () => ({
   posts: []
@@ -39,9 +28,11 @@ export const actions = {
     commit('REPLACE_POST', { post, index })
   },
   async nuxtServerInit ({ state, commit }) {
-    const posts = await allPostsCached()
-    if (!state.posts.length) {
-      commit('SET_POSTS', { posts })
-    }
+    const rawPosts = await postsClient.all()
+    const posts = await Promise.all(rawPosts.map((rawPost) => {
+      return Post.bySha(rawPost.sha)
+    }))
+
+    commit('SET_POSTS', { posts })
   }
 }

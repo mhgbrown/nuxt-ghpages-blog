@@ -1,6 +1,6 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 import pkg from './package'
-import Post from './models/post'
+import postsClient from './api/posts'
 
 export default {
   mode: 'universal',
@@ -66,11 +66,10 @@ export default {
 
     async routes () {
       try {
-        const posts = await Post.all()
+        const posts = await postsClient.all()
         return posts.map((post) => {
           return {
-            route: `/posts/${post.sha}`,
-            payload: post
+            route: `/posts/${post.sha}`
           }
         })
       } catch (error) {
