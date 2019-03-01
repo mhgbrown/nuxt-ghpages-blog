@@ -26,10 +26,10 @@ class Post {
   static _fromBlob (blob) {
     const post = new this(blob)
     const decodedContent = Base64.decode(blob.content)
-    const data = matter(decodedContent)
-    post.title = data.title
-    post.date = data.date
-    post.html = Markdown.toHTML(data.content)
+    const blobMatter = matter(decodedContent)
+    post.title = blobMatter.data.title
+    post.date = blobMatter.data.date
+    post.html = Markdown.toHTML(blobMatter.content)
     return post
   }
 

@@ -38,8 +38,10 @@ export const actions = {
 
     commit('REPLACE_POST', { post, index })
   },
-  async nuxtServerInit ({ commit }) {
+  async nuxtServerInit ({ state, commit }) {
     const posts = await allPostsCached()
-    commit('SET_POSTS', { posts })
+    if (!state.posts.length) {
+      commit('SET_POSTS', { posts })
+    }
   }
 }
