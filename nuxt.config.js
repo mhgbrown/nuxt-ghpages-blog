@@ -1,5 +1,4 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
-import pkg from './package'
 import postsClient from './api/posts'
 
 export default {
