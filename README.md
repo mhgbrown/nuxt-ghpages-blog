@@ -2,7 +2,7 @@
 
 > Nuxt-based Travis-deployed Github-hosted blog
 
-The blog content lives in [nuxt-ghpages-blog-content](https://github.com/mhgbrown/nuxt-ghpages-blog-content).
+This project generates a static blog site suitable for deployment on Github pages from content in [nuxt-ghpages-blog-content](https://github.com/mhgbrown/nuxt-ghpages-blog-content).
 
 ## Build Setup
 
