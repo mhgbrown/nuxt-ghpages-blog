@@ -7,6 +7,12 @@
       sm8
       md6
     >
+      <p>
+        This is a blog by
+        <a href="https://mhgbrown.is">
+          Morgan Brown
+        </a>
+      </p>
       <ul class="list--unstyled">
         <li v-for="post in posts" :key="post.sha">
           <nuxt-link :to="{ name: 'posts-id', params: { id: post.sha } }">

@@ -8,9 +8,9 @@
       md6
     >
       <p>
-        <nuxt-link :to="{ name: 'index' }" class="mr-2">
-          Blog
-        </nuxt-link>
+        This is a
+        <nuxt-link :to="{ name: 'index' }">blog</nuxt-link>
+         post by
         <a href="https://mhgbrown.is">
           Morgan Brown
         </a>
