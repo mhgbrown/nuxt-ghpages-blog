@@ -8,6 +8,9 @@ export default {
   ** Headers of the page
   */
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: 'Morgan Brown\'s Blog',
     meta: [
       { charset: 'utf-8' },
