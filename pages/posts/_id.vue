@@ -7,6 +7,7 @@
       sm8
       md6
     >
+      <p><nuxt-link :to="{ name: 'index' }" class="mr-2">Blog</nuxt-link><a href="https://mhgbrown.is">Morgan Brown</a></p>
       <h1>{{ post.title }}</h1>
       <div v-html="post.html" />
     </v-flex>
@@ -24,6 +25,15 @@ export default {
     if (!targetPost || !targetPost.html) {
       const post = await Post.bySha(params.id)
       store.dispatch('replacePost', { post })
+    }
+  },
+  head () {
+    return {
+      title: this.post.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        { hid: 'description', name: 'description', content: this.post.html }
+      ]
     }
   },
   computed: {
