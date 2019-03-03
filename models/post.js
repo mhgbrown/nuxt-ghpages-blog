@@ -26,9 +26,10 @@ class Post {
   static _fromBlob (blob) {
     const post = new this(blob)
     const decodedContent = Base64.decode(blob.content)
-    const blobMatter = matter(decodedContent)
+    const blobMatter = matter(decodedContent, { excerpt: this._firstParagraph })
     post.title = blobMatter.data.title
     post.archived = blobMatter.data.archived
+    post.excerpt = blobMatter.excerpt
     post.date = new Date(parseInt(blobMatter.data.date))
     post.html = Markdown.toHTML(blobMatter.content)
     return post
@@ -42,6 +43,20 @@ class Post {
   static _extractDate (name) {
     const millis = /(\d+)-/.exec(name)[1]
     return new Date(parseInt(millis))
+  }
+
+  static _firstParagraph (file, options) {
+    const lines = file.content.split('\n')
+    const excerpt = []
+    for (let i = 0; i < lines.length; i++) {
+      if (!lines[i].length && excerpt.length) {
+        break
+      }
+
+      excerpt.push(lines[i])
+    }
+
+    file.excerpt = excerpt.join(' ')
   }
 
   constructor (nodeOrBlob) {
