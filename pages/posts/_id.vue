@@ -10,9 +10,9 @@
       <p>
         This is a
         <nuxt-link :to="{ name: 'index' }">blog</nuxt-link>
-         post by
+        post by
         <a href="https://mhgbrown.is">
-          Morgan Brown
+        Morgan Brown
         </a>
       </p>
       <h1>{{ post.title }}</h1>

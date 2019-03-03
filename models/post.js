@@ -28,6 +28,7 @@ class Post {
     const decodedContent = Base64.decode(blob.content)
     const blobMatter = matter(decodedContent)
     post.title = blobMatter.data.title
+    post.archived = blobMatter.data.archived
     post.date = new Date(parseInt(blobMatter.data.date))
     post.html = Markdown.toHTML(blobMatter.content)
     return post

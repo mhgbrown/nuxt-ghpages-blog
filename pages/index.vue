@@ -14,7 +14,15 @@
         </a>
       </p>
       <ul class="list--unstyled">
-        <li v-for="post in posts" :key="post.sha">
+        <li v-for="post in activePosts" :key="post.sha">
+          <nuxt-link :to="{ name: 'posts-id', params: { id: post.sha } }">
+            {{ post.title }}
+          </nuxt-link>
+        </li>
+      </ul>
+      <p>Older, more embarrassing posts</p>
+      <ul class="list--unstyled">
+        <li v-for="post in archivedPosts" :key="post.sha">
           <nuxt-link :to="{ name: 'posts-id', params: { id: post.sha } }">
             {{ post.title }}
           </nuxt-link>
@@ -32,6 +40,12 @@ export default {
       return this.$store.state.posts
         .slice(0)
         .sort((a, b) => b.date - a.date)
+    },
+    activePosts () {
+      return this.posts.filter(post => !post.archived)
+    },
+    archivedPosts () {
+      return this.posts.filter(post => post.archived)
     }
   }
 }
