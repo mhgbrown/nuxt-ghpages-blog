@@ -7,7 +7,14 @@
       sm8
       md6
     >
-      <p><nuxt-link :to="{ name: 'index' }" class="mr-2">Blog</nuxt-link><a href="https://mhgbrown.is">Morgan Brown</a></p>
+      <p>
+        <nuxt-link :to="{ name: 'index' }" class="mr-2">
+          Blog
+        </nuxt-link>
+        <a href="https://mhgbrown.is">
+          Morgan Brown
+        </a>
+      </p>
       <h1>{{ post.title }}</h1>
       <div v-html="post.html" />
     </v-flex>
