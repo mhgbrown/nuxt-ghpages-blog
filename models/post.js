@@ -28,18 +28,19 @@ class Post {
     const decodedContent = Base64.decode(blob.content)
     const blobMatter = matter(decodedContent)
     post.title = blobMatter.data.title
-    post.date = blobMatter.data.date
+    post.date = new Date(parseInt(blobMatter.data.date))
     post.html = Markdown.toHTML(blobMatter.content)
     return post
   }
 
   static _extractTitle (name) {
     return name.replace(/\.md$/, '')
-      .replace(/^\d{4}-\d{1,2}-\d{1,2}-/, '')
+      .replace(/\d+-/, '')
   }
 
   static _extractDate (name) {
-    return /^\d{4}-\d{1,2}-\d{1,2}/.exec(name)[0]
+    const millis = /(\d+)-/.exec(name)[1]
+    return new Date(parseInt(millis))
   }
 
   constructor (nodeOrBlob) {

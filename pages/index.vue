@@ -23,9 +23,9 @@ export default {
   computed: {
     posts () {
       // I would mapState, but I'm running into wie
-      return this.$store.state.posts.slice(0).sort((a, b) => {
-        return Date.parse(b.date) - Date.parse(a.date)
-      })
+      return this.$store.state.posts
+        .slice(0)
+        .sort((a, b) => b.date - a.date)
     }
   }
 }
