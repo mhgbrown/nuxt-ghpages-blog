@@ -3,7 +3,9 @@ import hljs from 'highlightjs'
 
 class Markdown {
   constructor () {
-    this.renderer = new Remarkable({
+    this.renderer = new Remarkable('full', {
+      html: true,
+      typographer: true,
       // https://github.com/jonschlinkert/remarkable/issues/224
       langPrefix: 'hljs language-',
       highlight (str, lang) {
