@@ -37,7 +37,7 @@ export default {
         store.dispatch('replacePost', { post })
       } catch (error) {
         console.error(error)
-        redirect('/')
+        window.location = '/'
       }
     }
   },
