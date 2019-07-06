@@ -9,10 +9,12 @@
     >
       <p>
         This is a
-        <nuxt-link :to="{ name: 'index' }">blog</nuxt-link>
+        <nuxt-link :to="{ name: 'index' }">
+          blog
+        </nuxt-link>
         post by
         <a href="https://mhgbrown.is">
-        Morgan Brown
+          Morgan Brown
         </a>
       </p>
       <h1>{{ post.title }}</h1>
@@ -25,13 +27,18 @@
 import Post from '@/models/post'
 
 export default {
-  async fetch ({ store, params }) {
+  async fetch ({ store, params, redirect }) {
     const targetPost = store.state.posts.find(post => post.sha === params.id)
     // see if post corresponding to this id has html
     // if it doesn't exist or doesn't have content, load from api and replace in store
     if (!targetPost || !targetPost.html) {
-      const post = await Post.bySha(params.id)
-      store.dispatch('replacePost', { post })
+      try {
+        const post = await Post.bySha(params.id)
+        store.dispatch('replacePost', { post })
+      } catch (error) {
+        console.error(error)
+        redirect('/')
+      }
     }
   },
   head () {

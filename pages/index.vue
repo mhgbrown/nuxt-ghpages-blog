@@ -20,7 +20,9 @@
           </nuxt-link>
         </li>
       </ul>
-      <p class="mt-3">Older, more embarrassing posts</p>
+      <p class="mt-3">
+        Older, more embarrassing posts
+      </p>
       <ul class="list--unstyled">
         <li v-for="post in archivedPosts" :key="post.sha">
           <nuxt-link :to="{ name: 'posts-id', params: { id: post.sha } }">
