@@ -68,7 +68,7 @@ export default {
    */
   generate: {
     interval: 100,
-
+    fallback: true,
     async routes () {
       try {
         const posts = await postsClient.all()
