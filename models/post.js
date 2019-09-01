@@ -32,6 +32,7 @@ class Post {
     post.excerpt = blobMatter.excerpt
     post.date = new Date(parseInt(blobMatter.data.date))
     post.html = Markdown.toHTML(blobMatter.content)
+    post.filename = `${blobMatter.data.date}-${blobMatter.data.title}.md`
     return post
   }
 

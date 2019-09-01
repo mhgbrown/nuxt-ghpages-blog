@@ -19,6 +19,14 @@
       </p>
       <h1>{{ post.title }}</h1>
       <div v-html="post.html" />
+      <p>
+        <i>
+          See something you want to change?
+          <a :href="`https://github.com/mhgbrown/nuxt-ghpages-blog-content/edit/master/posts/${post.filename}`">
+            Submit a proposal via Github.
+          </a>
+        </i>
+      </p>
     </v-flex>
   </v-layout>
 </template>
